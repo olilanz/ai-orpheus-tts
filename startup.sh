@@ -55,7 +55,7 @@ if grep -q 'demo.queue(max_size=20).launch(share=True, server_name="0.0.0.0", se
 else
     # Replace demo.launch() with demo.launch(server_name="0.0.0.0", server_port=args.port)
     # This causes the Gradio server to listen on all network interfaces
-    sed -i 's/demo.queue(max_size=20).launch(share=True)/demo.queue(max_size=20).launch(share=True, server_name="0.0.0.0", server_port=7860)/g' "$REPO_HOME/gradio_demo.py"
+    sed -i 's/demo.queue(max_size=20).launch(share=True)/demo.queue(max_size=20).launch(share=True, server_name="0.0.0.0", server_port=7860)/g' "$REPO_HOME/app.py"
     echo "Launch function patched with demo.queue(max_size=20).launch(share=True, server_name="0.0.0.0", server_port=7860)."
     NEEDS_INSTALL=1
 fi
@@ -68,5 +68,5 @@ fi
 # Start the service
 echo "🚀 Starting the application..."
 cd "$REPO_HOME"
-python3 -u app.py ${APP_ARGS} 2>&1 | tee "${CACHE_HOME}/output.log"
+python3 -u app.py 2>&1 | tee "${CACHE_HOME}/output.log"
 echo "❌ The application has terminated."
